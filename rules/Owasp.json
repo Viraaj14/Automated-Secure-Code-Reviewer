@@ -1,0 +1,163 @@
+[
+  {
+    "rule_id": "A01-001",
+    "vulnerability": "Missing Authentication Decorator",
+    "pattern": "@app.route",
+    "condition": "not_contains:@login_required",
+    "severity": "High",
+    "suggestion": "Ensure all routes require authentication using decorators like @login_required."
+  },
+  {
+    "rule_id": "A02-001",
+    "vulnerability": "Weak Hashing Algorithm (MD5)",
+    "pattern": "hashlib\\.md5",
+    "severity": "High",
+    "suggestion": "Avoid using MD5. Use SHA-256 or bcrypt for secure hashing."
+  },
+  {
+    "rule_id": "A02-002",
+    "vulnerability": "Weak Hashing Algorithm (SHA1)",
+    "pattern": "hashlib\\.sha1",
+    "severity": "High",
+    "suggestion": "Avoid using SHA1. Use SHA-256 or bcrypt for secure hashing."
+  },
+  {
+    "rule_id": "A03-001",
+    "vulnerability": "Command Injection via os.system",
+    "pattern": "os\\.system",
+    "severity": "High",
+    "suggestion": "Use subprocess.run with input validation instead of os.system."
+  },
+  {
+    "rule_id": "A03-002",
+    "vulnerability": "Use of eval()",
+    "pattern": "\\beval\\s*\\(",
+    "severity": "Critical",
+    "suggestion": "Avoid eval(). Use safer alternatives like literal_eval or JSON parsing."
+  },
+  {
+    "rule_id": "A04-001",
+    "vulnerability": "Unrestricted Admin Access",
+    "pattern": "@app.route\\('/admin'\\)",
+    "condition": "not_contains:@admin_required",
+    "severity": "High",
+    "suggestion": "Protect admin routes using an admin authentication decorator."
+  },
+  {
+    "rule_id": "A05-001",
+    "vulnerability": "Debug Mode Enabled",
+    "pattern": "app\\.run\\(debug=True\\)",
+    "severity": "Critical",
+    "suggestion": "Never use debug mode in production environments."
+  },
+  {
+    "rule_id": "A06-001",
+    "vulnerability": "Use of Known Vulnerable Package",
+    "pattern": "flask==0\\.12",
+    "severity": "High",
+    "suggestion": "Upgrade to a more recent and secure version of Flask."
+  },
+  {
+    "rule_id": "A07-001",
+    "vulnerability": "Hardcoded Password",
+    "pattern": "password\\s*=\\s*['\"].+['\"]",
+    "severity": "Critical",
+    "suggestion": "Avoid hardcoding credentials. Use environment variables or secrets management."
+  },
+  {
+    "rule_id": "A08-001",
+    "vulnerability": "Insecure Deserialization (pickle)",
+    "pattern": "pickle\\.load",
+    "severity": "Critical",
+    "suggestion": "Avoid pickle for loading data. Use safer formats like JSON."
+  },
+  {
+    "rule_id": "A09-001",
+    "vulnerability": "No Logging for Login Failures",
+    "pattern": "login_user",
+    "condition": "not_contains:logger",
+    "severity": "Medium",
+    "suggestion": "Log failed login attempts for audit purposes."
+  },
+  {
+    "rule_id": "A10-001",
+    "vulnerability": "Potential SSRF via requests.get",
+    "pattern": "requests\\.get",
+    "condition": "contains:user_input",
+    "severity": "High",
+    "suggestion": "Validate and sanitize user input used in URL requests."
+  },
+  {
+    "rule_id": "B01-001",
+    "vulnerability": "Hardcoded API Key",
+    "pattern": "api_key\\s*=\\s*['\"].+['\"]",
+    "severity": "Critical",
+    "suggestion": "Store API keys in environment variables or secret managers."
+  },
+  {
+    "rule_id": "B01-002",
+    "vulnerability": "Hardcoded Secret Key",
+    "pattern": "SECRET_KEY\\s*=\\s*['\"].+['\"]",
+    "severity": "Critical",
+    "suggestion": "Use environment variables to store secret keys."
+  },
+  {
+    "rule_id": "B02-001",
+    "vulnerability": "Database URI Exposed",
+    "pattern": "SQLALCHEMY_DATABASE_URI\\s*=\\s*['\"].+['\"]",
+    "severity": "High",
+    "suggestion": "Do not hardcode database URIs. Load from environment variables."
+  },
+  {
+    "rule_id": "B03-001",
+    "vulnerability": "Unparameterized SQL Query",
+    "pattern": "execute\\(\\s*\\\"SELECT .*?\\\"\\)",
+    "severity": "Critical",
+    "suggestion": "Use parameterized queries to prevent SQL injection."
+  },
+  {
+    "rule_id": "B04-001",
+    "vulnerability": "Insecure Random Generator",
+    "pattern": "random\\.random\\(\\)",
+    "severity": "High",
+    "suggestion": "Use the secrets module for cryptographic randomness."
+  },
+  {
+    "rule_id": "B05-001",
+    "vulnerability": "Missing CSRF Protection",
+    "pattern": "@app.route",
+    "condition": "not_contains:csrf_protect",
+    "severity": "High",
+    "suggestion": "Ensure CSRF protection is applied to all routes handling forms."
+  },
+  {
+    "rule_id": "B06-001",
+    "vulnerability": "Sensitive Data Exposure in Logs",
+    "pattern": "logger\\.info\\(.*password.*\\)",
+    "severity": "High",
+    "suggestion": "Never log sensitive data like passwords. Sanitize log inputs."
+  },
+  {
+    "rule_id": "B07-001",
+    "vulnerability": "Unrestricted File Upload",
+    "pattern": "file\\.save\\(",
+    "condition": "not_contains:secure_filename",
+    "severity": "High",
+    "suggestion": "Validate and sanitize file names using secure_filename or similar methods."
+  },
+  {
+    "rule_id": "B08-001",
+    "vulnerability": "Use of Bare Except Block",
+    "pattern": "\\bexcept\\s*:\\s*$",
+    "severity": "High",
+    "suggestion": "Avoid bare except blocks. Always catch specific exceptions."
+  },
+  {
+    "rule_id": "B09-001",
+    "vulnerability": "Missing Rate Limiting",
+    "pattern": "@app.route",
+    "condition": "not_contains:limiter.limit",
+    "severity": "High",
+    "suggestion": "Add rate limiting to prevent abuse or DoS attacks."
+  }
+]
