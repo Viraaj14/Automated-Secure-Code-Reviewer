@@ -1,24 +1,25 @@
-🛡️ Python Static Code Security Scanner
-A lightweight Python tool to scan source files for common security vulnerabilities using regex-based rules. Inspired by OWASP Top 10 practices.
+# 🛡️ Python Static Code Security Scanner
 
-📁 Structure
-bash
-Copy
-Edit
+A lightweight Python tool to scan source files for common security vulnerabilities using regex-based rules. Inspired by **OWASP Top 10** practices.
+
+---
+
+## 📁 Project Structure
+
 .
-├── app.py                 # Scanner script
-├── rules/Owasp.json       # Rule definitions (JSON)
+├── app.py # Scanner script
+├── rules/Owasp.json # Rule definitions (JSON format)
 ├── test_vulnerable_app.py # Sample vulnerable test file
-🚀 Usage
-Run the Scanner
 
-bash
-Copy
-Edit
+---
+
+## 🚀 How to Use
+
+1. **Run the Scanner:**
+
+```bash
 python app.py scan test_vulnerable_app.py
-Expected Output
-
-Shows line number, rule ID, severity, and fix:
+Sample Output:
 
 pgsql
 Copy
@@ -26,27 +27,29 @@ Edit
 [!] Line 9 | Critical | A07-001
 → Hardcoded Password
 → Code: password = "supersecret123"
-→ Fix:  Use env vars instead
+→ Fix:  Use environment variables instead
 🧪 Test File
 test_vulnerable_app.py includes:
 
-Hardcoded secrets
-
-Missing auth decorators
+Hardcoded passwords/API keys
 
 Command injection
 
-Insecure deserialization
+Missing authentication decorators
 
-Weak hashes (MD5, SHA1)
+Weak hashing (MD5, SHA1)
 
-Debug mode
+Insecure deserialization (pickle)
+
+Debug mode enabled
+
+Use it to validate rule detection.
 
 ✅ Features
-Regex & context-based matching
+Regex & context-aware rule matching
 
-OWASP-style rule definitions
+OWASP-style vulnerability coverage
 
-Easily extensible
+Clear CLI output
 
-Clear CLI results
+Easily customizable via rules/Owasp.json
